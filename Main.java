@@ -1,195 +1,56 @@
 import java.util.Scanner;
-
-class Subject{
-
-int SubjectMarks;
-
-int credits;
-
-int grade;
-
-public void calculategrade(){
-
-if(SubjectMarks>=90){
-
-grade=10;
-
-}
-
-else if(SubjectMarks>=80){
-
-grade=9;
-
-}
-
-else if(SubjectMarks>=70){
-
-grade=8;
-
-}
-
-else if(SubjectMarks>=60){
-
-grade=7;
-
-}
-
-else if(SubjectMarks>=50){
-
-grade=6;
-
-}
-
-else if(SubjectMarks>=40){
-
-grade=5;
-
-}
-
-else{
-
-grade=0;
-
-}}}
-
-class Student{
-
+class Books{
 String name;
-
-String usn;
-
-double sgpa;
-
-Subject sub[];
-
-Scanner s;
-
-public Student()
-
+String author;
+int price;
+int numPages;
+Books(String name,String author,int price,int numPages)
 {
-
-int i;
-
-sub=new Subject[8];
-
-for(i=0;i<8;i++)
-
+this.name=name;
+this.author=author;
+this.price=price;
+this.numPages=numPages;
+}
+public String toString()
 {
-
-sub[i]=new Subject();
-
+String name,author,price,numPages;
+name="Book name:"+this.name+"\n";
+author="Author name:"+this.author+"\n";
+price="Price:"+this.price+"\n";
+numPages="Number of pages:"+this.numPages+"\n";
+return name+author+price+numPages;
 }
-
-s=new Scanner(System.in);
-
-}   
-
-public void getStudentdetails()
-
-{
-
-System.out.println("Eneter the Student Name:");
-
-name=s.nextLine();
-
-System.out.println("Eneter the Student USN:");
-
-usn=s.nextLine();
-
 }
-
-public void getmarks(){
-
-for(int i=0;i<8;i++)
-
-{
-
-System.out.println("Enter the marks for subject"+(i+1));
-
-sub[i].SubjectMarks=s.nextInt();
-
-System.out.println("Enter the credits for subject"+(i+1));
-
-sub[i].credits=s.nextInt();
-
-sub[i].calculategrade();
-
-}
-
-}
-
-public void sgpa()
-
-{
-
-double cre=0;
-
-int totalcredits=0;
-
-for(int i=0;i<8;i++)
-
-{
-
-cre+=sub[i].grade*sub[i].credits;
-
-totalcredits+=sub[i].credits;
-
-}
-
-if(totalcredits!=0)
-
-{
-
-sgpa=cre/totalcredits;
-
-}
-
-else
-
-{
-
-sgpa=0;
-
-}
-
-}
-
-void display()
-
-{
-
-System.out.println("Student Name:"+name);
-
-System.out.println("USN:"+usn);
-
-System.out.println("SGPA:"+sgpa);
-
-}
-
-}
-
 class Main
-
 {
-
-public static void main(String args[])
-
+public static void main(String args[]){
+Scanner s =new Scanner(System.in);
+int n;
+String name;
+String author;
+int price;
+int numPages;
+System.out.println("ENTER THE NUMBER OF BOOKS");
+n=s.nextInt();
+Books b[]=new Books[n];
+for(int i=0;i<n;i++)
 {
+System.out.println("ENTER THE NAME OF THE BOOK");
+name=s.next();
+System.out.println("ENTER THE AUTHOR OF THE BOOK");
+author=s.next();
 
-Student student=new Student();
+System.out.println("ENTER THE PRICE OF THE BOOK");
+price=s.nextInt();
 
-for(int i=0;i<3;i++){
+System.out.println("ENTER THE NUMBER OF PAGES OF THE BOOK");
+numPages=s.nextInt();
 
-student.getStudentdetails();
-
-student.getmarks();
-
-student.sgpa();
-
-student.display();
-
+b[i]=new Books(name,author,price,numPages);
 }
+for(int i=0;i<n;i++)
+{
+System.out.println(b[i].toString());}
 System.out.println("NAME:K INDU");
 System.out.println("USN:1BM23CS131");
-
 }}
