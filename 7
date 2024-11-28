@@ -1,0 +1,80 @@
+import java.util.Scanner;
+
+// Custom Exception Class
+class WrongAge extends Exception {
+    // Constructor for custom message
+    public WrongAge(String message) {
+        super(message);
+    }
+}
+
+// InputScanner class to handle user input
+class InputScanner {
+    static Scanner s = new Scanner(System.in);
+}
+
+// Father class (base class)
+class Father {
+    int fatherAge;
+
+    // Constructor for Father class
+    public Father(int fatherAge) throws WrongAge {
+        if (fatherAge < 0) {
+            throw new WrongAge("Age cannot be negative");
+        }
+        this.fatherAge = fatherAge;
+    }
+
+    // Method to display father's age
+    public void display() {
+        System.out.println("Father's age: " + fatherAge);
+    }
+}
+
+// Son class (derived class)
+class Son extends Father {
+    int sonAge;
+
+    // Constructor for Son class
+    public Son(int fatherAge) throws WrongAge {
+        super(fatherAge);  // Pass the father's age to the Father constructor
+
+        System.out.print("Enter Son's age: ");
+        sonAge = InputScanner.s.nextInt();
+
+        // Check if son's age is valid
+        if (sonAge < 0) {
+            throw new WrongAge("Age cannot be negative");
+        } else if (sonAge >= fatherAge) {
+            throw new WrongAge("Son's age cannot be greater than or equal to father's age");
+        }
+    }
+
+    // Method to display son's age
+    public void display() {
+        System.out.println("Son's age: " + sonAge);
+    }
+}
+
+// Main class to test the program
+public class AgeTest {
+    public static void main(String[] args) {
+        try {
+            // Prompt for the father's age
+            System.out.print("Enter Father's age: ");
+            int fatherAge = InputScanner.s.nextInt();
+
+            // Create Father object and display age
+            Father father = new Father(fatherAge);
+            father.display();
+
+            // Create Son object and display age
+            Son son = new Son(fatherAge);
+            son.display();
+
+        } catch (WrongAge e) {
+            // Catch the WrongAge exception and print the error message
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
